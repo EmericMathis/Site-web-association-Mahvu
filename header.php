@@ -25,4 +25,15 @@
                     'container' => false,
                 ]); ?>
             </nav>
+
+            <button id="theme-toggle">Toggle Theme</button>
+
+            <h1 class="text-center">
+                <?php
+                if (has_post_thumbnail()) {
+                    the_post_thumbnail('full');
+                }
+                the_title();
+                ?>
+            </h1>
         </header>

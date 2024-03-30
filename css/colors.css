@@ -1,0 +1,31 @@
+/* personnalisation des couleurs de bootstrap */
+
+body.dark-theme {
+  --primary-color: var(--primary-color-dark);
+  --secondary-color: var(--secondary-color-dark);
+  --tertiary-color: var(--tertiary-color-dark);
+  --quaternary-color: var(--quaternary-color-dark);
+}
+
+body:not(.dark-theme) {
+  --primary-color: var(--primary-color-light);
+  --secondary-color: var(--secondary-color-light);
+  --tertiary-color: var(--tertiary-color-light);
+  --quaternary-color: var(--quaternary-color-light);
+}
+
+body {
+  background-color: var(--secondary-color);
+}
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--secondary-color);
+}
+
+.btn-primary a {
+  color: var(--secondary-color);
+}
+
+nav a svg {
+  fill: var(--secondary-color);
+}

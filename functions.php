@@ -1,74 +1,77 @@
 <?php
-function theme_supports()
-{
-    // Ajout des fonctionnalités au thème WordPress (image à la une, titre de la page, etc.)
-    add_theme_support('title-tag');
-    add_theme_support('post-thumbnails');
-    add_theme_support('menus');
-    register_nav_menu('header', 'En tête du menu');
-    register_nav_menu('footer', 'Pied de page');
 
-    add_image_size('post-thumbnail', 350, 215, true);
+// Charge les fichiers situés dans le dossier inc, 
+// servant à organiser le code en découpant les fonctions en plusieurs fichiers
+
+foreach (glob(get_template_directory() . "/inc/*.php") as $file) {
+    require_once $file;
 }
 
-function theme_register_assets()
+
+function add_custom_meta_boxes()
 {
-    // Ajout des feuilles de style et des scripts
-    wp_register_style('bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', []);
-    wp_register_script('bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', ['popper', 'jquery'], false, true);
-    wp_register_script('popper', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', [], false, true);
-    wp_deregister_script('jquery');
-    wp_register_script('jquery', 'https://code.jquery.com/jquery-3.2.1.slim.min.js', [], false, true);
-    wp_enqueue_style('bootstrap');
-    wp_enqueue_script('bootstrap');
+    $fields = [
+        'contact_tel' => 'Contact Tel/Fax',
+        'contact_email' => 'Courriel',
+        'adresse' => 'Adresse',
+        'horaires' => 'Horaires', // Ajoutez cette ligne
+        'map_html' => 'HTML de la carte Google Maps'
+    ];
 
-    wp_enqueue_style('style', get_stylesheet_uri());
-}
-
-function theme_title_separator()
-{
-    // Changer le séparateur du titre de la page
-    return '|';
-}
-
-function montheme_menu_class($classes, $item, $args)
-{
-    // Ajout des classes au menu
-    if ($args->theme_location == 'header') {
-
-        $classes[] = 'btn btn-primary btn-square';
+    foreach ($fields as $id => $title) {
+        add_meta_box(
+            $id,
+            $title,
+            'show_custom_meta_box',
+            'page',
+            'normal',
+            'high',
+            ['id' => $id]
+        );
     }
-    return $classes;
 }
 
-function montheme_menu_link_class($attrs)
+function show_custom_meta_box($post, $metabox)
 {
-    // Ajout des classes au lien du menu
-    $attrs['class'] = 'nav-link text-white';
+    $field_id = $metabox['args']['id'];
+    $field_value = get_post_meta($post->ID, $field_id, true);
 
-    return $attrs;
+    if ($field_id == 'adresse' || $field_id == 'horaires') { // Ajoutez 'horaires' ici
+        echo '<textarea name="' . $field_id . '">' . $field_value . '</textarea>';
+    } else {
+        echo '<input type="text" name="' . $field_id . '" value="' . $field_value . '">';
+    }
 }
 
-
-add_action('after_setup_theme', 'theme_supports');
-add_action('wp_enqueue_scripts', 'theme_register_assets');
-add_filter('document_title_separator', 'theme_title_separator');
-add_filter('nav_menu_css_class', 'montheme_menu_class', 10, 3); //10 est la priorité du filtre (plus le nombre est bas, plus la priorité est élevée), et le 3 est le nombre d'arguments que la fonction accepte.
-add_filter('nav_menu_link_attributes', 'montheme_menu_link_class');
-
-function add_featured_image_to_menu($item_output, $item, $depth, $args)
+function save_custom_meta_boxes($post_id)
 {
-    if ($args->theme_location == 'header' && $item->object == 'page') {
-        $post = get_post($item->object_id);
-        $image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full')[0] ?? null;
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
 
-        if ($image) {
-            $item_output = '<a href="' . $item->url . '">';
-            $item_output .= '<img src="' . $image . '" alt="' . $item->title . '">';
-            $item_output .= $item->title . '</a>';
+    $fields = ['contact_tel', 'contact_email', 'adresse', 'horaires', 'map_html']; // Ajoutez 'horaires' ici
+
+    foreach ($fields as $field) {
+        if (isset($_POST[$field])) {
+            update_post_meta($post_id, $field, $_POST[$field]);
         }
     }
-
-    return $item_output;
 }
-add_filter('walker_nav_menu_start_el', 'add_featured_image_to_menu', 10, 4);
+
+add_action('add_meta_boxes', 'add_custom_meta_boxes');
+add_action('save_post', 'save_custom_meta_boxes');
+
+
+function replace_svg_images($html, $post_id, $post_thumbnail_id, $size, $attr)
+{
+    $attachment_file = get_attached_file($post_thumbnail_id);
+    if (pathinfo($attachment_file, PATHINFO_EXTENSION) == 'svg') {
+        $svg_content = file_get_contents($attachment_file);
+        $html = $svg_content;
+    }
+    return $html;
+}
+add_filter('post_thumbnail_html', 'replace_svg_images', 10, 5);
