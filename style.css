@@ -1,0 +1,48 @@
+/*
+Theme Name: Mahvu
+Author: Emeric MATHIS
+Description: Thème pour le site de l'association de malvoyants Mahvu
+Requires at least: WordPress 5.0
+Version: 1.0
+*/
+
+/* header */
+
+header nav ul {
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  width: 100%;
+  list-style: none;
+  gap: 0.3rem;
+}
+
+header nav ul li {
+  width: 100%;
+  height: 6.5rem;
+  text-align: center;
+}
+
+header nav ul li a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  height: 100%;
+  text-wrap: wrap;
+}
+
+@media screen and (max-width: 993px) {
+  header nav ul {
+    display: grid;
+    grid-template-columns: repeat(3, 2fr);
+    gap: 0.3rem;
+  }
+
+  header nav ul li {
+    width: 100%;
+  }
+}
+
+/*  */
