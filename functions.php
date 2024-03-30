@@ -55,3 +55,20 @@ add_action('wp_enqueue_scripts', 'theme_register_assets');
 add_filter('document_title_separator', 'theme_title_separator');
 add_filter('nav_menu_css_class', 'montheme_menu_class', 10, 3); //10 est la priorité du filtre (plus le nombre est bas, plus la priorité est élevée), et le 3 est le nombre d'arguments que la fonction accepte.
 add_filter('nav_menu_link_attributes', 'montheme_menu_link_class');
+
+function add_featured_image_to_menu($item_output, $item, $depth, $args)
+{
+    if ($args->theme_location == 'header' && $item->object == 'page') {
+        $post = get_post($item->object_id);
+        $image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full')[0] ?? null;
+
+        if ($image) {
+            $item_output = '<a href="' . $item->url . '">';
+            $item_output .= '<img src="' . $image . '" alt="' . $item->title . '">';
+            $item_output .= $item->title . '</a>';
+        }
+    }
+
+    return $item_output;
+}
+add_filter('walker_nav_menu_start_el', 'add_featured_image_to_menu', 10, 4);
