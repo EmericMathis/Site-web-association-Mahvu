@@ -53,4 +53,3 @@
                 ?>
             </h1>
         </header>
-        <!--                		SWITCH THEME  								-->

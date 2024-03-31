@@ -20,6 +20,9 @@
     let savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
         document.body.classList.add(savedTheme);
+        document.body.classList.add(savedTheme);
+        var themeToggleCheckbox = document.getElementById('theme-toggle-checkbox');
+        themeToggleCheckbox.checked = savedTheme === 'dark-theme';
     }
 </script>
 <script>
