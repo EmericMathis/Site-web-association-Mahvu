@@ -4,7 +4,7 @@
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <?php wp_head(); ?>
 </head>
 
@@ -13,7 +13,7 @@
     <?php wp_body_open(); ?>
     <div class="container">
         <header class="header">
-            <div class="d-flex justify-content-center align-items-center mb-4">
+            <div class="d-flex justify-content-center align-items-center m-4">
                 <a href="<?php echo home_url('/'); ?>">
                     <img src="<?php echo get_template_directory_uri(); ?>/img/logo.svg" alt="Logo" class="img-fluid" style="max-width: 200px;">
                 </a>
@@ -26,14 +26,20 @@
                 ]); ?>
             </nav>
 
-            <button id="theme-toggle">Toggle Theme</button>
+            <label class="switch" for="theme-toggle-checkbox">
+                <input type="checkbox" id="theme-toggle-checkbox">
+                <span class="slider"></span>
+            </label>
 
             <h1 class="text-center">
                 <?php
-                if (has_post_thumbnail()) {
-                    the_post_thumbnail('full');
+                $page_id = get_queried_object_id();
+                $icon = get_post_meta($page_id, '_icon', true);
+                if ($icon) {
+                    echo "<i class='material-icons'>$icon</i>";
                 }
-                the_title();
+                single_post_title();
                 ?>
             </h1>
         </header>
+        <!--                		SWITCH THEME  								-->

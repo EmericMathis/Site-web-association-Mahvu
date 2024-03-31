@@ -2,16 +2,21 @@
 // Couleurs par défaut pour les thèmes clair et sombre
 $colors = [
     'light' => [
-        'primary' => '#3b4bc0',
-        'secondary' => '#ffffff',
-        'tertiary' => '#df1422',
-        'quaternary' => '#0a0000'
+        'background' => '#ffffff',
+        'nav-background' => '#3b4bc0',
+        'nav-hover' => '#2c3f9b',
+        'nav-text' => '#ffffff',
+        'text' => '#0a0000',
+        'highlight' => '#df1422',
+
     ],
     'dark' => [
-        'primary' => '#363636',
-        'secondary' => '#0a0000',
-        'tertiary' => '#dd3333',
-        'quaternary' => '#eeee22'
+        'background' => '#0a0000',
+        'nav-background' => '#363636',
+        'nav-hover' => '#555555',
+        'nav-text' => '#ffffff',
+        'text' => '#eeee22',
+        'highlight' => '#dd3333',
     ]
 ];
 
@@ -20,9 +25,15 @@ function mytheme_customize_register($wp_customize)
     global $colors;
 
     foreach ($colors as $theme => $color_set) {
+        // Ajoute une section pour chaque thème
+        $wp_customize->add_section($theme . '_colors', [
+            'title' => ucfirst($theme) . ' Theme Colors',
+            'priority' => 30,
+        ]);
+
         foreach ($color_set as $color => $default) {
             $wp_customize->add_setting($color . '_color_' . $theme, ['default' => $default, 'sanitize_callback' => 'sanitize_hex_color']);
-            $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, $color . '_color_' . $theme, ['label' => ucfirst($color) . ' Color (' . ucfirst($theme) . ' Theme)', 'section' => 'colors', 'settings' => $color . '_color_' . $theme]));
+            $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, $color . '_color_' . $theme, ['label' => ucfirst($color) . ' Color', 'section' => $theme . '_colors', 'settings' => $color . '_color_' . $theme]));
         }
     }
 }
@@ -57,13 +68,3 @@ function mytheme_reset_colors()
     }
 }
 add_action('init', 'mytheme_reset_colors');
-
-function mytheme_add_reset_link($wp_admin_bar)
-{
-    $wp_admin_bar->add_node([
-        'id' => 'reset_colors',
-        'title' => 'Réinitialiser les couleurs',
-        'href' => add_query_arg('reset_colors', '1')
-    ]);
-}
-add_action('admin_bar_menu', 'mytheme_add_reset_link', 999);

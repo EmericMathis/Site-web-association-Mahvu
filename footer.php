@@ -2,7 +2,8 @@
     <?php wp_nav_menu([
         'theme_location' => 'footer',
         'container' => false,
-        'menu_class' => 'navbar-nav mr-auto'
+        'menu_class' => 'navbar-nav mr-auto',
+        'fallback_cb' => false // évite d'afficher les nav si le menu n'est pas défini
     ]);
 
     if (WP_DEBUG) {
@@ -15,7 +16,7 @@
 </body>
 
 <script>
-    document.getElementById('theme-toggle').addEventListener('click', function() {
+    document.getElementById('theme-toggle-checkbox').addEventListener('click', function() {
         document.body.classList.toggle('dark-theme');
         if (document.body.classList.contains('dark-theme')) {
             localStorage.setItem('theme', 'dark');

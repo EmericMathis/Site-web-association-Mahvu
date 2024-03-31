@@ -1,31 +1,50 @@
-/* personnalisation des couleurs de bootstrap */
+/* Personnalisation des couleurs de bootstrap selon les couleurs choisies dans l'interface, la création des couleurs par défaut est gérée dans custom-colors.php */
+/* Pour gérer le mode sombre, on utilise une classe dark-theme qui permet de changer les couleurs de base */
 
 body.dark-theme {
-  --primary-color: var(--primary-color-dark);
-  --secondary-color: var(--secondary-color-dark);
-  --tertiary-color: var(--tertiary-color-dark);
-  --quaternary-color: var(--quaternary-color-dark);
+  --nav-background-color: var(--nav-background-color-dark);
+  --background-color: var(--background-color-dark);
+  --highlight-color: var(--highlight-color-dark);
+  --text-color: var(--text-color-dark);
+  --nav-text-color: var(--nav-text-color-dark);
+  --nav-hover-color: var(--nav-hover-color-dark);
 }
 
 body:not(.dark-theme) {
-  --primary-color: var(--primary-color-light);
-  --secondary-color: var(--secondary-color-light);
-  --tertiary-color: var(--tertiary-color-light);
-  --quaternary-color: var(--quaternary-color-light);
+  --nav-background-color: var(--nav-background-color-light);
+  --background-color: var(--background-color-light);
+  --highlight-color: var(--highlight-color-light);
+  --text-color: var(--text-color-light);
+  --nav-text-color: var(--nav-text-color-light);
+  --nav-hover-color: var(--nav-hover-color-light);
 }
 
+/* Application des couleurs dans les différentes classes de bootstrap, et sélecteurs globaux */
+/* Les couleurs changent avec le theme car elles sont définies en variables css au dessus */
+
 body {
-  background-color: var(--secondary-color);
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
+
 .btn-primary {
-  background-color: var(--primary-color);
-  border-color: var(--secondary-color);
+  background-color: var(--nav-background-color);
+  border-color: var(--background-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--nav-hover-color);
+  border-color: var(--nav-background-color);
 }
 
 .btn-primary a {
-  color: var(--secondary-color);
+  color: var(--nav-text-color);
+}
+
+.btn-primary a:hover {
+  text-decoration: none !important;
 }
 
 nav a svg {
-  fill: var(--secondary-color);
+  fill: var(--background-color);
 }

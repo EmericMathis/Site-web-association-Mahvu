@@ -37,3 +37,7 @@ header nav ul li a {
     width: 100%;
   }
 }
+
+.material-icons.menu-icon {
+  font-size: 50px !important; /* Remplacez ceci par la taille que vous voulez */
+}
