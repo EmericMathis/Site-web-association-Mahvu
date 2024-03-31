@@ -6,15 +6,12 @@
 foreach (glob(get_template_directory() . "/inc/*.php") as $file) {
     require_once $file;
 }
-class My_Walker_Nav_Menu extends Walker_Nav_Menu
+function remove_default_image_sizes($sizes)
 {
-    function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0)
-    {
-        $output .= sprintf(
-            "\n<span class='nav-item'><a href='%s'%s>%s</a></span>\n",
-            $item->url,
-            ($item->object_id === get_the_ID()) ? ' class="current"' : '',
-            $item->title
-        );
-    }
+    unset($sizes['thumbnail']);    // Supprimer les miniatures
+    unset($sizes['medium']);       // Supprimer les images de taille moyenne
+    unset($sizes['large']);        // Supprimer les grandes images
+
+    return $sizes;
 }
+add_filter('intermediate_image_sizes_advanced', 'remove_default_image_sizes');

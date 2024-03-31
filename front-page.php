@@ -4,7 +4,7 @@
 
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-                <section class="row no-gutters card-accueil bg-primary rounded p-2">
+                <section class="row no-gutters card-accueil bg-primary rounded p-4">
                         <div class="col-sm-12 col-lg-6 align text-center text-lg-left">
                                 <h2>Contact :</h2>
                                 <p>Tel/Fax : 04 77 32 66 11<br>
@@ -33,26 +33,33 @@ $args = array(
 );
 $query = new WP_Query($args);
 if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post(); ?>
-                <div class="card mt-5">
-                        <?php if (has_post_thumbnail()) : ?>
-                                <img src="<?php the_post_thumbnail_url(); ?>" class="card-img-top" alt="<?php the_title(); ?>" style="height: 20rem; object-fit:cover;">
-                        <?php endif; ?>
-                        <div class="card-body">
-                                <h5 class="card-title"><?php the_title(); ?></h5>
-                                <p class="card-text">
-                                        Publié le <?php the_time(get_option('date_format')); ?>
-                                        par <?php the_author(); ?> • <?php comments_number(); ?>
-                                </p>
-                                <p class="card-text"><?php the_excerpt(); ?></p>
-                                <div style="text-align: right;">
-                                        <a href="<?php the_permalink(); ?>" class="btn btn-primary">Lire la suite</a>
+                <article class="mt-4">
+                        <h3>Dernier événement publié :</h3>
+                        <div class="card">
+                                <?php if (has_post_thumbnail()) : ?>
+                                        <img src="<?php the_post_thumbnail_url(); ?>" class="card-img-top" alt="<?php the_title(); ?>" style="height: 20rem; object-fit:cover;">
+                                <?php endif; ?>
+                                <div class="card-body">
+                                        <h5 class="card-title"><?php the_title(); ?></h5>
+                                        <p class="card-text">
+                                                Publié le <?php the_time(get_option('date_format')); ?>
+                                        </p>
+                                        <p class="card-text"><?php the_excerpt(); ?></p>
+                                        <div style="text-align: right;">
+                                                <a href="<?php the_permalink(); ?>" class="btn btn-primary">Lire la suite</a>
+                                        </div>
                                 </div>
                         </div>
-                </div>
+                </article>
 <?php endwhile;
 endif;
 wp_reset_postdata();
 ?>
+
+<section class="row no-gutters card-accueil bg-primary rounded p-4 mt-4">
+        <?php the_content(); ?>
+</section>
+
 
 
 <?php get_footer(); ?>

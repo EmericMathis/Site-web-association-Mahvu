@@ -5,6 +5,7 @@
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/chemin/vers/votre/favicon.ico" type="image/x-icon" />
     <?php wp_head(); ?>
 </head>
 
@@ -13,9 +14,9 @@
     <?php wp_body_open(); ?>
     <div class="container">
         <header class="header">
-            <div class="d-flex justify-content-center align-items-center m-4" style="height: 100px;">
+            <div class="d-flex flex-column justify-content-center align-items-center m-4" style="height: 110px;">
                 <a href="<?php echo home_url('/'); ?>">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/logo.svg" alt="Logo" class="logo" style="max-width: 200px;">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/logo.svg" alt="Logo" class="logo" style="height: 7rem;">
                     <div class="eye">
                         <div class="shut">
                             <span></span>
@@ -24,7 +25,9 @@
                         </div>
                     </div>
                 </a>
+                <p class="association-name flex-end"><?php bloginfo('name'); ?> - <?php bloginfo('description'); ?></p>
             </div>
+
 
 
 

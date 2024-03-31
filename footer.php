@@ -5,10 +5,11 @@
         wp_nav_menu(array(
             'theme_location' => 'footer',
             'container' => false,
-            'items_wrap' => '<nav class="navbar">%3$s</nav>',
+            'items_wrap' => '<nav class="d-flex flex-column">%3$s</nav>',
             'walker' => new My_Walker_Nav_Menu(),
         ));
         ?>
+        <a href="/sitemap_index.xml">Plan du site</a>
     </div>
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.1);" aria-hidden="true">
         <span class="strong">M</span>ouvement des <span class="strong">A</span>veugles et des <span class="strong">H</span>andicapés <span class="strong">V</span>isuels <span class="strong">U</span>nis

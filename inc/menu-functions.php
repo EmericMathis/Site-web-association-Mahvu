@@ -74,3 +74,16 @@ function theme_setup()
     }
 }
 add_action('after_setup_theme', 'theme_setup');
+
+class My_Walker_Nav_Menu extends Walker_Nav_Menu
+{
+    function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0)
+    {
+        $output .= sprintf(
+            "\n<span class='nav-item'><a href='%s'%s>%s</a></span>\n",
+            $item->url,
+            ($item->object_id === get_the_ID()) ? ' class="current"' : '',
+            $item->title
+        );
+    }
+}

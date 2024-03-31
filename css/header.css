@@ -58,3 +58,8 @@ header nav ul li a {
   top: 0.1rem;
   font-size: 2.2rem;
 }
+
+body:not(.dark-theme) .association-name {
+  font-weight: 400;
+  color: var(--nav-background-color);
+}
