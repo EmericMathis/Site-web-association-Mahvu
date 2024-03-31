@@ -23,3 +23,7 @@ h5,
 h6 {
   font-family: "Roboto Light", sans-serif;
 }
+
+h1 {
+  font-size: 2em !important;
+}

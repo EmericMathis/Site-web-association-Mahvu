@@ -8,6 +8,7 @@ body.dark-theme {
   --text-color: var(--text-color-dark);
   --nav-text-color: var(--nav-text-color-dark);
   --nav-hover-color: var(--nav-hover-color-dark);
+  --nav-border-hover-color: var(--nav-border-hover-color-dark);
 }
 
 body:not(.dark-theme) {
@@ -17,32 +18,43 @@ body:not(.dark-theme) {
   --text-color: var(--text-color-light);
   --nav-text-color: var(--nav-text-color-light);
   --nav-hover-color: var(--nav-hover-color-light);
+  --nav-border-hover-color: var(--nav-border-hover-color-light);
 }
 
 /* Application des couleurs dans les différentes classes de bootstrap, et sélecteurs globaux */
 /* Les couleurs changent avec le theme car elles sont définies en variables css au dessus */
 
 body {
-  background-color: var(--background-color);
+  background-color: var(--background-color) !important;
   color: var(--text-color);
 }
 
 .btn-primary {
-  background-color: var(--nav-background-color);
-  border-color: var(--background-color);
+  background-color: var(--nav-background-color) !important;
+  border-color: var(--nav-background-color) !important;
 }
 
-.btn-primary:hover {
-  background-color: var(--nav-hover-color);
-  border-color: var(--nav-background-color);
+header .btn-primary:hover {
+  background-color: var(--nav-hover-color) !important;
+  border-color: var(--nav-border-hover-color) !important;
+  box-shadow: 0 0 0 2px var(--nav-border-hover-color) inset !important;
 }
 
 .btn-primary a {
-  color: var(--nav-text-color);
+  color: var(--nav-text-color) !important;
 }
 
 .btn-primary a:hover {
   text-decoration: none !important;
+}
+
+.current_page_item {
+  box-shadow: 0 0 0 2px var(--highlight-color) inset !important;
+  border-color: var(--highlight-color) !important;
+}
+
+.strong {
+  color: var(--highlight-color) !important;
 }
 
 nav a svg {
@@ -69,4 +81,27 @@ body.dark-theme .map-container::after {
   right: 0;
   background-color: rgba(0, 0, 0, 0.089);
   pointer-events: none;
+}
+
+.pagination .active .page-link {
+  background-color: var(--nav-background-color) !important;
+  border-color: var(--nav-background-color) !important;
+  color: #ffffff;
+}
+
+.pagination .page-link {
+  background-color: var(--background-color) !important;
+  border-color: var(--nav-background-color) !important;
+  color: var(--text-color);
+}
+
+.pagination .page-link:hover {
+  background-color: var(--nav-hover-color) !important;
+  border-color: var(--nav-hover-color) !important;
+  color: #ffffff;
+}
+
+.card-body {
+  background-color: var(--background-color) !important;
+  color: var(--text-color) !important;
 }

@@ -1,17 +1,20 @@
-<footer id="colophon" class="site-footer">
-    <?php wp_nav_menu([
-        'theme_location' => 'footer',
-        'container' => false,
-        'menu_class' => 'navbar-nav mr-auto',
-        'fallback_cb' => false // évite d'afficher les nav si le menu n'est pas défini
-    ]);
-
-    if (WP_DEBUG) {
-        global $template;
-        printf($template);
-    }; ?>
-</footer>
 </div>
+<footer class="btn-primary text-center mt-5">
+    <div class="container p-4">
+        <?php
+        wp_nav_menu(array(
+            'theme_location' => 'footer',
+            'container' => false,
+            'items_wrap' => '<nav class="navbar">%3$s</nav>',
+            'walker' => new My_Walker_Nav_Menu(),
+        ));
+        ?>
+    </div>
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.1);" aria-hidden="true">
+        <span class="strong">M</span>ouvement des <span class="strong">A</span>veugles et des <span class="strong">H</span>andicapés <span class="strong">V</span>isuels <span class="strong">U</span>nis
+    </div>
+</footer>
+
 <?php wp_footer(); ?>
 </body>
 

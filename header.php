@@ -40,7 +40,7 @@
                 <span class="slider"></span>
             </label>
 
-            <h1 class="title text-center">
+            <h1 class="title text-center pb-3">
                 <?php
                 $page_id = get_queried_object_id();
                 $icon = get_post_meta($page_id, '_icon', true);

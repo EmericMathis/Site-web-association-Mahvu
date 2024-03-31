@@ -24,8 +24,35 @@
                                 </div>
                         </div>
                 </section>
-
 <?php endwhile;
 endif; ?>
+
+<?php
+$args = array(
+        'posts_per_page' => 1,
+);
+$query = new WP_Query($args);
+if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post(); ?>
+                <div class="card mt-5">
+                        <?php if (has_post_thumbnail()) : ?>
+                                <img src="<?php the_post_thumbnail_url(); ?>" class="card-img-top" alt="<?php the_title(); ?>" style="height: 20rem; object-fit:cover;">
+                        <?php endif; ?>
+                        <div class="card-body">
+                                <h5 class="card-title"><?php the_title(); ?></h5>
+                                <p class="card-text">
+                                        Publié le <?php the_time(get_option('date_format')); ?>
+                                        par <?php the_author(); ?> • <?php comments_number(); ?>
+                                </p>
+                                <p class="card-text"><?php the_excerpt(); ?></p>
+                                <div style="text-align: right;">
+                                        <a href="<?php the_permalink(); ?>" class="btn btn-primary">Lire la suite</a>
+                                </div>
+                        </div>
+                </div>
+<?php endwhile;
+endif;
+wp_reset_postdata();
+?>
+
 
 <?php get_footer(); ?>

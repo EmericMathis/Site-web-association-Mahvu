@@ -22,11 +22,11 @@ function theme_setup()
 
         $pages = array(
             'Accueil' => 'home_icon',
+            'Présentation' => 'presentation_icon',
+            'Histoire de l\'association' => 'history_icon',
+            'Status' => 'status_icon',
             'Événements' => 'events_icon',
             'Événements passés' => 'past_events_icon',
-            'Historique de l\'association' => 'history_icon',
-            'Présentation' => 'presentation_icon',
-            'Status' => 'status_icon',
         );
 
         foreach ($pages as $page_title => $icon_name) {

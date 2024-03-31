@@ -16,7 +16,7 @@ body.dark-theme .logo {
   border-radius: 75% 0;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.5s, background-color 0.9s ease-in-out;
 }
 
 .ball {
@@ -40,6 +40,56 @@ body.dark-theme .logo {
   height: calc(100% + 1.8rem);
   border: 0.9rem solid rgb(90, 90, 90);
   border-radius: 50%;
+  transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.eye:hover .ball::before {
+  border-color: rgb(156, 13, 13);
+  transform: scale(1.1);
+}
+
+.eye:hover {
+  background-color: #ffe3e3;
+}
+
+.ball::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  border-radius: 50%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.eye:hover .ball::after {
+  transform: scale(1.5);
+}
+
+.shut {
+  width: 10rem;
+  height: 10rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  z-index: 9;
+}
+
+.shut span {
+  display: block;
+  position: relative;
+  top: 10%;
+  left: 0;
+  width: 100%;
+  height: 20%;
+  background: rgb(27, 27, 27);
+  border-radius: 300%;
+  transition: height 0.9s ease-in-out;
+  animation: changeHeight 30s ease-in-out infinite;
+  border: rgb(44, 44, 44) 1px solid;
 }
 
 @keyframes eye-move {
@@ -66,30 +116,6 @@ body.dark-theme .logo {
   100% {
     transform: translate(-50%, -50%);
   }
-}
-
-.shut {
-  width: 10rem;
-  height: 10rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-45deg);
-  z-index: 9;
-}
-
-.shut span {
-  display: block;
-  position: relative;
-  top: 10%;
-  left: 0;
-  width: 100%;
-  height: 20%;
-  background: rgb(27, 27, 27);
-  border-radius: 300%;
-  transition: height 0.9s ease-in-out;
-  animation: changeHeight 30s ease-in-out infinite;
-  border: rgb(44, 44, 44) 1px solid;
 }
 
 @keyframes changeHeight {
@@ -141,30 +167,4 @@ body.dark-theme .logo {
     height: 100%;
     border-radius: 70%;
   }
-}
-
-@keyframes spinShrink {
-  0% {
-    transform: scale(1) rotate(0deg);
-  }
-  100% {
-    transform: scale(0) rotate(360deg);
-  }
-}
-
-@keyframes spinGrow {
-  0% {
-    transform: scale(0) rotate(0deg);
-  }
-  100% {
-    transform: scale(1) rotate(360deg);
-  }
-}
-
-.spinShrink {
-  animation: spinShrink 1s forwards;
-}
-
-.spinGrow {
-  animation: spinGrow 1s forwards;
 }
