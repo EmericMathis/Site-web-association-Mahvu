@@ -13,11 +13,20 @@
     <?php wp_body_open(); ?>
     <div class="container">
         <header class="header">
-            <div class="d-flex justify-content-center align-items-center m-4">
+            <div class="d-flex justify-content-center align-items-center m-4" style="height: 100px;">
                 <a href="<?php echo home_url('/'); ?>">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/logo.svg" alt="Logo" class="img-fluid" style="max-width: 200px;">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/logo.svg" alt="Logo" class="logo" style="max-width: 200px;">
+                    <div class="eye">
+                        <div class="shut">
+                            <span></span>
+                        </div>
+                        <div class="ball">
+                        </div>
+                    </div>
                 </a>
             </div>
+
+
 
             <nav class="w-100">
                 <?php wp_nav_menu([
