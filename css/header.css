@@ -1,5 +1,10 @@
 /* header */
-
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 header nav ul {
   padding: 0;
   display: grid;
@@ -40,4 +45,16 @@ header nav ul li a {
 
 .material-icons.menu-icon {
   font-size: 50px !important; /* Remplacez ceci par la taille que vous voulez */
+}
+
+.title {
+  position: relative;
+  width: fit-content;
+}
+
+.icon-size {
+  position: absolute;
+  left: -2.2rem;
+  top: 0.5rem;
+  font-size: 2.2rem;
 }

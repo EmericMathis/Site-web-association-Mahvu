@@ -48,3 +48,25 @@ body {
 nav a svg {
   fill: var(--background-color);
 }
+
+body:not(.dark-theme) .bg-primary {
+  background-color: rgba(104, 104, 104, 0.089) !important;
+}
+
+body.dark-theme .bg-primary {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+body.dark-theme .map-container {
+  position: relative;
+}
+body.dark-theme .map-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.089);
+  pointer-events: none;
+}

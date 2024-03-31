@@ -40,14 +40,16 @@
                 <span class="slider"></span>
             </label>
 
-            <h1 class="text-center">
+            <h1 class="title text-center">
                 <?php
                 $page_id = get_queried_object_id();
                 $icon = get_post_meta($page_id, '_icon', true);
                 if ($icon) {
-                    echo "<i class='material-icons'>$icon</i>";
+                    echo "<i class='material-icons icon-size'>$icon</i>";
                 }
+                echo "<strong>";
                 single_post_title();
+                echo "</strong>";
                 ?>
             </h1>
         </header>

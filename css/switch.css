@@ -5,7 +5,8 @@ header {
 }
 .switch {
   position: absolute;
-  top: 0;
+  top: 1rem;
+  left: 0;
   font-size: 17px;
   display: inline-block;
   width: 3.5em;
