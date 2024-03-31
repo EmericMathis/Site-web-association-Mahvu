@@ -16,20 +16,19 @@
 </body>
 
 <script>
+    // Au chargement de la page, on vérifie si un thème est sauvegardé de suite pour éviter le flash
+    let savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        document.body.classList.add(savedTheme);
+    }
+</script>
+<script>
     document.getElementById('theme-toggle-checkbox').addEventListener('click', function() {
         document.body.classList.toggle('dark-theme');
         if (document.body.classList.contains('dark-theme')) {
-            localStorage.setItem('theme', 'dark');
+            localStorage.setItem('theme', 'dark-theme');
         } else {
-            localStorage.setItem('theme', 'light');
-        }
-    });
-
-    // On page load, check for a saved theme in localStorage and apply it
-    document.addEventListener('DOMContentLoaded', function() {
-        var savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            document.body.classList.add(savedTheme);
+            localStorage.setItem('theme', 'light-theme');
         }
     });
 </script>
